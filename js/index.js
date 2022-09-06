@@ -52,15 +52,21 @@ class Enemy {
     }
 }
 
-const enemy = new Enemy({position: {x: waypoints[0].x, y: waypoints[0].y}})
-const enemy2 = new Enemy({position: {x: waypoints[0].x - 150, y: waypoints[0].y}})
+const enemies = []
+for (let i = 0; i < 10; i++) {
+    const xOffset = i * 150
+    enemies.push(new Enemy({
+        position: {x: waypoints[0].x - xOffset, y: waypoints[0].y}
+    }))
+}
 
 function animate() {
     requestAnimationFrame(animate)
 
     context.drawImage(image, 0, 0)
-    enemy.update()
-    enemy2.update()
+    enemies.forEach(enemy => {
+        enemy.update()
+    })
 }
 
 
