@@ -24,6 +24,14 @@ class PlacementTile {
         context.fillStyle = this.color
         context.fillRect(this.position.x, this.position.y, this.size, this.size)
     }
+
+    update(mouse) {
+        this.draw()
+        if (mouse.x > this.position.x && mouse.x < this.position.x + this.size &&
+            mouse.y > this.position.y && mouse.y < this.position.y + this.size) {
+            console.log('colliding')
+        }
+    }
 }
 
 const placementTiles = []
@@ -104,8 +112,18 @@ function animate() {
     })
 
     placementTiles.forEach(tile => {
-        tile.draw()
+        tile.update(mouse)
     })
 }
+
+const mouse = {
+    x: undefined,
+    y: undefined
+}
+
+window.addEventListener('mousemove', (event) => {
+    mouse.x = event.clientX
+    mouse.y = event.clientY
+})
 
 
