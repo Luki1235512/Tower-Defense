@@ -17,9 +17,11 @@ class PlacementTile {
     constructor({position = {x: 0, y: 0}}) {
         this.position = position
         this.size = 64
+        this.color = 'rgba(255, 255, 255, 0.1)'
     }
 
     draw() {
+        context.fillStyle = this.color
         context.fillRect(this.position.x, this.position.y, this.size, this.size)
     }
 }
@@ -99,6 +101,10 @@ function animate() {
     context.drawImage(image, 0, 0)
     enemies.forEach(enemy => {
         enemy.update()
+    })
+
+    placementTiles.forEach(tile => {
+        tile.draw()
     })
 }
 
