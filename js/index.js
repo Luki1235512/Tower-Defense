@@ -7,6 +7,39 @@ canvas.height = 768
 context.fillStyle = 'white'
 context.fillRect(0, 0, canvas.width, canvas.height)
 
+const placementTilesData2D = []
+
+for (let i = 0; i < placementTilesData.length; i+= 20) {
+    placementTilesData2D.push(placementTilesData.slice(i, i + 20))
+}
+
+class PlacementTile {
+    constructor({position = {x: 0, y: 0}}) {
+        this.position = position
+        this.size = 64
+    }
+
+    draw() {
+        context.fillRect(this.position.x, this.position.y, this.size, this.size)
+    }
+}
+
+const placementTiles = []
+
+placementTilesData2D.forEach((row, y) => {
+    row.forEach((symbol, x) => {
+        if (symbol === 14) {
+            // ADD BUILDING PLACEMENT TILE
+            placementTiles.push(new PlacementTile({
+                position: {
+                    x: x * 64,
+                    y: y * 64
+                }
+            }))
+        }
+    })
+})
+
 const image = new Image()
 image.onload = () => {
     animate()
