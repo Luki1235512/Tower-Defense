@@ -57,12 +57,27 @@ function animate() {
     placementTiles.forEach(tile => {
         tile.update(mouse)
     })
+
+    buildings.forEach(buildings => {
+        buildings.draw()
+    })
 }
 
 const mouse = {
     x: undefined,
     y: undefined
 }
+
+canvas.addEventListener('click', (event) => {
+    if (activeTile) {
+        buildings.push(new Building({
+            position: {
+                x: activeTile.position.x,
+                y: activeTile.position.y
+            }
+        }))
+    }
+})
 
 window.addEventListener('mousemove', (event) => {
     mouse.x = event.clientX
