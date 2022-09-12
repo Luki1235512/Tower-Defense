@@ -58,8 +58,11 @@ function animate() {
         tile.update(mouse)
     })
 
-    buildings.forEach(buildings => {
-        buildings.draw()
+    buildings.forEach(building => {
+        building.draw()
+        building.projectiles.forEach(projectile => {
+            projectile.draw()
+        })
     })
 }
 
