@@ -63,13 +63,39 @@ class Enemy {
     }
 }
 
+class Projectile {
+    constructor({position = {x: 0, y: 0}}) {
+        this.position = position
+        this.velocity = {
+            x: 0,
+            y: 0
+        }
+    }
+
+    draw() {
+        context.beginPath()
+        context.arc(this.position.x, this.position.y, 10, 0, Math.PI * 2)
+        context.fillStyle = 'orange'
+        context.fill()
+    }
+}
+
 class Building {
     constructor({position = {x: 0, y: 0}}) {
         this.position = position
+        this.width = 64
+        this.projectiles = [
+            new Projectile({
+                position: {
+                    x: this.position.x,
+                    y: this.position.y
+                }
+            })
+        ]
     }
 
     draw() {
         context.fillStyle = 'blue'
-        context.fillRect(this.position.x, this.position.y, 64, 64)
+        context.fillRect(this.position.x, this.position.y, this.width, this.width)
     }
 }
