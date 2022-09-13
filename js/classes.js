@@ -34,6 +34,7 @@ class Enemy {
             y: this.position.y + this.height / 2,
         }
         this.radius = 25
+        this.health = 100
     }
 
     draw() {
@@ -47,7 +48,7 @@ class Enemy {
         context.fillRect(this.position.x, this.position.y - 15, this.width, 10)
 
         context.fillStyle = 'green'
-        context.fillRect(this.position.x, this.position.y - 15, this.width, 10)
+        context.fillRect(this.position.x, this.position.y - 15, this.width * this.health / 100, 10)
     }
 
     update() {
