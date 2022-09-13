@@ -66,17 +66,19 @@ class Enemy {
 }
 
 class Projectile {
-    constructor({position = {x: 0, y: 0}}) {
+    constructor({position = {x: 0, y: 0}, enemy}) {
         this.position = position
         this.velocity = {
             x: 0,
             y: 0
         }
+        this.enemy = enemy
+        this.radius = 10
     }
 
     draw() {
         context.beginPath()
-        context.arc(this.position.x, this.position.y, 10, 0, Math.PI * 2)
+        context.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
         context.fillStyle = 'orange'
         context.fill()
     }
@@ -109,7 +111,8 @@ class Building {
                 position: {
                     x: this.center.x,
                     y: this.center.y
-                }
+                },
+                enemy: enemies[0]
             })
         ]
     }
