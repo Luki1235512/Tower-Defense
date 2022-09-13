@@ -89,8 +89,9 @@ class Projectile {
             enemies[0].center.y - this.position.y,
             enemies[0].center.x - this.position.x)
 
-        this.velocity.x = Math.cos(angle)
-        this.velocity.y = Math.sin(angle)
+        const power = 5
+        this.velocity.x = Math.cos(angle) * power
+        this.velocity.y = Math.sin(angle) * power
 
         this.position.x += this.velocity.x
         this.position.y += this.velocity.y
