@@ -16,7 +16,6 @@ class PlacementTile {
         this.draw()
         if (mouse.x > this.position.x && mouse.x < this.position.x + this.size &&
             mouse.y > this.position.y && mouse.y < this.position.y + this.size) {
-            console.log('colliding')
             this.color = 'white'
         } else {
             this.color = 'rgba(255, 255, 255, 0.1)'
@@ -34,11 +33,14 @@ class Enemy {
             x: this.position.x + this.width / 2,
             y: this.position.y + this.height / 2,
         }
+        this.radius = 25
     }
 
     draw() {
         context.fillStyle = 'red'
-        context.fillRect(this.position.x, this.position.y, this.width, this.height)
+        context.beginPath()
+        context.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2)
+        context.fill()
     }
 
     update() {
