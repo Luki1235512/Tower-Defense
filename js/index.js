@@ -59,7 +59,15 @@ function animate() {
     })
 
     buildings.forEach(building => {
-        building.draw()
+        building.update()
+        building.target = null
+        const validEnemies = enemies.filter(enemy => {
+            const xDifference = enemy.center.x - building.position.x
+            const yDifference = enemy.center.y - building.position.y
+            const distance = Math.hypot(xDifference, yDifference)
+            return distance < enemy.radius + building.radius
+        })
+        building.target = validEnemies[0]
 
         for (let i = building.projectiles.length - 1; i >= 0; i--) {
             const projectile = building.projectiles[i]

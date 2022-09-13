@@ -86,8 +86,8 @@ class Projectile {
     update() {
         this.draw()
         const angle = Math.atan2(
-            enemies[0].center.y - this.position.y,
-            enemies[0].center.x - this.position.x)
+            this.enemy.center.y - this.position.y,
+            this.enemy.center.x - this.position.x)
 
         const power = 5
         this.velocity.x = Math.cos(angle) * power
@@ -107,19 +107,34 @@ class Building {
             x: this.position.x + this.width / 2,
             y: this.position.y + this.height / 2
         }
-        this.projectiles = [
-            new Projectile({
-                position: {
-                    x: this.center.x,
-                    y: this.center.y
-                },
-                enemy: enemies[0]
-            })
-        ]
+        this.projectiles = []
+        this.radius = 250
+        this.target
+        this.frames = 0
     }
 
     draw() {
         context.fillStyle = 'blue'
         context.fillRect(this.position.x, this.position.y, this.width, this.height)
+
+        context.beginPath()
+        context.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2)
+        context.fillStyle = 'rgba(0, 0, 255, 0.2)'
+        context.fill()
+    }
+
+    update() {
+        this.draw()
+        if (this.frames % 100 === 0 && this.target) {
+            this.projectiles.push(
+                new Projectile({
+                    position: {
+                        x: this.center.x,
+                        y: this.center.y
+                    },
+                    enemy: this.target
+                }))
+        }
+        this.frames++
     }
 }
