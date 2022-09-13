@@ -41,6 +41,13 @@ class Enemy {
         context.beginPath()
         context.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2)
         context.fill()
+
+        // HEALTH BAR
+        context.fillStyle = 'red'
+        context.fillRect(this.position.x, this.position.y - 15, this.width, 10)
+
+        context.fillStyle = 'green'
+        context.fillRect(this.position.x, this.position.y - 15, this.width, 10)
     }
 
     update() {
@@ -109,7 +116,7 @@ class Building {
         }
         this.projectiles = []
         this.radius = 250
-        this.target
+        this.target = null
         this.frames = 0
     }
 
