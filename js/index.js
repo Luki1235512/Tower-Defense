@@ -49,11 +49,12 @@ function spawnEnemies(spawnCount) {
 const buildings = []
 let activeTile = undefined
 let enemyCount = 3
+let hearts = 10
 
 spawnEnemies(enemyCount)
 
 function animate() {
-    requestAnimationFrame(animate)
+    const animationId = requestAnimationFrame(animate)
 
     context.drawImage(image, 0, 0)
 
@@ -62,7 +63,13 @@ function animate() {
         enemy.update()
 
         if (enemy.position.x > canvas.width) {
+            hearts -= 1
             enemies.splice(i, 1)
+
+            if (hearts === 0) {
+                cancelAnimationFrame(animationId)
+                document.querySelector('#gameOver').style.display = 'flex'
+            }
         }
     }
 
