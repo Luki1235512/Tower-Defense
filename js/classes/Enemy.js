@@ -1,6 +1,6 @@
-class Enemy {
+class Enemy extends Sprite {
     constructor({position = {x: 0, y: 0}}) {
-        this.position = position
+        super({position, imageSrc: ''})
         this.width = 50
         this.height = 50
         this.waypointIndex = 0
@@ -17,10 +17,14 @@ class Enemy {
     }
 
     draw() {
+        super.draw()
+
+        // REMOVE AFTER ADDING imageSrc
         context.fillStyle = 'red'
         context.beginPath()
         context.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2)
         context.fill()
+        // REMOVE AFTER ADDING imageSrc
 
         // HEALTH BAR
         context.fillStyle = 'red'

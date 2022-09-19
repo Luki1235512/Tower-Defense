@@ -1,6 +1,6 @@
-class Projectile {
+class Projectile extends Sprite {
     constructor({position = {x: 0, y: 0}, enemy}) {
-        this.position = position
+        super({position, imageSrc: ''})
         this.velocity = {
             x: 0,
             y: 0
@@ -10,10 +10,14 @@ class Projectile {
     }
 
     draw() {
+        super.draw()
+
+        // REMOVE AFTER ADDING imageSrc
         context.beginPath()
         context.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2)
         context.fillStyle = 'orange'
         context.fill()
+        // REMOVE AFTER ADDING imageSrc
     }
 
     update() {
