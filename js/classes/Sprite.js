@@ -39,7 +39,9 @@ class Sprite {
             crop.width,
             crop.height
         )
+    }
 
+    update() {
         // ANIMATION
         this.frames.elapsed++
         if (this.frames.elapsed % this.frames.hold === 0) {

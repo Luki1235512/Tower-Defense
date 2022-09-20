@@ -1,6 +1,6 @@
 class Building extends Sprite {
     constructor({position = {x: 0, y: 0}}) {
-        super({position, imageSrc: ''})
+        super({position, imageSrc: '', frames: {max: 19}})
         this.width = 64
         this.height = 64
         this.center = {
@@ -10,7 +10,6 @@ class Building extends Sprite {
         this.projectiles = []
         this.radius = 250
         this.target = null
-        this.elapsedSpawnTime = 0
     }
 
     draw() {
@@ -29,16 +28,25 @@ class Building extends Sprite {
 
     update() {
         this.draw()
-        if (this.elapsedSpawnTime % 100 === 0 && this.target) {
-            this.projectiles.push(
-                new Projectile({
-                    position: {
-                        x: this.center.x,
-                        y: this.center.y
-                    },
-                    enemy: this.target
-                }))
+        if (this.target || (!this.target && this.frames.current !== 0)) {
+            super.update()
         }
-        this.elapsedSpawnTime++
+        if (this.target &&
+            this.frames.current === 6 &&
+            this.frames.elapsed % this.frames.hold === 0) {
+                this.shoot()
+        }
+    }
+
+    shoot() {
+        this.projectiles.push(
+            new Projectile({
+                position: {
+                    x: this.center.x,
+                    y: this.center.y
+                },
+                enemy: this.target
+            })
+        )
     }
 }
