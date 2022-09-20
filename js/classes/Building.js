@@ -1,6 +1,6 @@
-class Building {
+class Building extends Sprite {
     constructor({position = {x: 0, y: 0}}) {
-        this.position = position
+        super({position, imageSrc: ''})
         this.width = 64
         this.height = 64
         this.center = {
@@ -10,12 +10,16 @@ class Building {
         this.projectiles = []
         this.radius = 250
         this.target = null
-        this.frames = 0
+        this.elapsedSpawnTime = 0
     }
 
     draw() {
+        super.draw()
+
+        // REMOVE AFTER ADDING imageSrc
         context.fillStyle = 'blue'
         context.fillRect(this.position.x, this.position.y, this.width, this.height)
+        // REMOVE AFTER ADDING imageSrc
 
         context.beginPath()
         context.arc(this.center.x, this.center.y, this.radius, 0, Math.PI * 2)
@@ -25,7 +29,7 @@ class Building {
 
     update() {
         this.draw()
-        if (this.frames % 100 === 0 && this.target) {
+        if (this.elapsedSpawnTime % 100 === 0 && this.target) {
             this.projectiles.push(
                 new Projectile({
                     position: {
@@ -35,6 +39,6 @@ class Building {
                     enemy: this.target
                 }))
         }
-        this.frames++
+        this.elapsedSpawnTime++
     }
 }
